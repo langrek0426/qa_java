@@ -2,18 +2,28 @@ import com.example.Feline;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.List;
-
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(Parameterized.class)
 public class TestFeline {
 
-    @Mock
-    Feline feline;
+    int kittensCount;
+    int expectedKittensCount;
+
+    public TestFeline(int kittensCount, int expectedKittensCount) {
+        this.kittensCount = kittensCount;
+        this.expectedKittensCount = expectedKittensCount;
+
+    }
+        @Parameterized.Parameters
+    public static Object[][] getData() {
+        return new Object[][]{
+                {10, 10},
+                {1, 1}
+        };
+    }
 
     @Test
     public void eatMeatTest() throws Exception {
@@ -33,7 +43,8 @@ public class TestFeline {
 
     @Test
     public void getKittensTest() {
-        feline.getKittens(10);
-        Mockito.verify(feline).getKittens((Mockito.anyInt()));
+        Feline feline = new Feline();
+        int kittens = feline.getKittens(kittensCount);
+        Assert.assertEquals(expectedKittensCount, kittens);
     }
 }

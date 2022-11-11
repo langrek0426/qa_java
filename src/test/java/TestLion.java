@@ -16,15 +16,6 @@ public class TestLion {
     @Mock
     Feline feline;
 
-
-
-//    @Parameterized.Parameters
-//    public static Object[][] getData() {
-//        return new Object[][]{
-//                {"Самец", true},
-//                {"Самка", false}
-//        };
-//    }
     @Test
     public void getKittensTest() throws Exception {
         Lion lion = new Lion("Самец", feline);
